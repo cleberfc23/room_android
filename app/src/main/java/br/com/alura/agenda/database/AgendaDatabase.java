@@ -1,6 +1,5 @@
 package br.com.alura.agenda.database;
 
-
 import android.content.Context;
 
 import androidx.room.Database;
@@ -25,9 +24,13 @@ public abstract class AgendaDatabase extends RoomDatabase {
     public static AgendaDatabase getInstanceRoom(Context context) {
         if (instance == null) {
             instance = Room.databaseBuilder(context, AgendaDatabase.class, AGENDA_DB)
+                    .allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
                     .build();
         }
         return instance;
     }
 
 }
+
+
